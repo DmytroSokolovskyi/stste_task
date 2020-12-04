@@ -1,0 +1,14 @@
+.coment {
+    background: #92d720;
+    width: 80%;
+    margin: 2px;
+    text-align: center;
+}
+.button {
+    background: #92d720;
+    width: 20%;
+    margin: 2px;
+}
+.osnova {
+    display: flex;
+}

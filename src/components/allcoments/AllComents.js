@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Coment from "../coment/Coment";
+import './AllComents.css'
 
 class AllComents extends Component {
 
@@ -22,7 +23,7 @@ class AllComents extends Component {
         let {allpost, chosepost} = this.state;
         console.log(allpost);
         return (
-            <div>
+            <div className={'posts'}>
                 {
                     allpost.map(post => <Coment post={post} key={post.id} chosepost={this.chosepost}
                                                 deletepost={this.deletepost}/>)
