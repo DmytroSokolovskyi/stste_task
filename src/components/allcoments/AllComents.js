@@ -7,34 +7,32 @@ class AllComents extends Component {
 
     postService = new PostService();
 
-    state = {allpost: [], chosepost: null};
+    state = {allpost: [], chose: null};
 
-    chosepost = (id) => {
-        this.postService.getPostbyID(id).then(value => this.setState({chosepost: value}))
+    chose = (id) => {
+        this.postService.getbyID('posts', id).then(value => this.setState({chose: value}))
     };
 
     deletepost = (id) => {
-        this.setState({allpost: this.postService.deletePost(this.state.allpost, id)});
+        this.setState({allpost: this.postService.deleteID(this.state.allpost, id)});
     };
 
     render() {
-        let {allpost, chosepost} = this.state;
-        console.log(allpost);
+        let {allpost, chose} = this.state;
         return (
             <div className={'posts'}>
                 {
-                    allpost.map(post => <Coment post={post} key={post.id} chosepost={this.chosepost}
-                                                deletepost={this.deletepost}/>)
+                    allpost.map(post => <Coment post={post} key={post.id} chose={this.chose} deletepost={this.deletepost}/>)
                 }
                 {
-                    chosepost && <Coment post={chosepost} flag={true}/>
+                    chose && <Coment post={chose} flag={true}/>
                 }
             </div>
         );
     }
 
     componentDidMount() {
-        this.postService.getAllPosts().then(value => this.setState({allpost: value}))
+        this.postService.getAll('posts').then(value => this.setState({allpost: value}))
     }
 
 

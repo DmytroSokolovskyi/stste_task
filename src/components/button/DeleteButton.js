@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 
 class DeleteButton extends Component {
     render() {
-        let {deletepost, id} = this.props;
+        let {delet, id} = this.props;
         return (
-                <button onClick={() =>deletepost(id)}>delete</button>
+                <button onClick={() =>delet(id)}>DELL</button>
         );
     }
 }

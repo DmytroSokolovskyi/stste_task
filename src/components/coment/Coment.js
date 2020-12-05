@@ -5,7 +5,7 @@ import './Comen.css'
 
 class Coment extends Component {
     render() {
-let {post, chosepost, deletepost, flag} = this.props
+let {post, chose, deletepost, flag} = this.props
 
 
         return (
@@ -15,7 +15,7 @@ let {post, chosepost, deletepost, flag} = this.props
                 </div>
 
                 { !flag && (<div className={'button'}>
-                    <ChoseButton chosepost={chosepost} id={post.id}/> <DeleteButton id={post.id} deletepost={deletepost}/>
+                    <ChoseButton chose={chose} id={post.id}/> <DeleteButton id={post.id} delet={deletepost}/>
                 </div>)}
             </div>
 

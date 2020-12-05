@@ -1,27 +1,21 @@
 export class PostService {
-    url = 'https://jsonplaceholder.typicode.com/posts/';
+    url = 'https://jsonplaceholder.typicode.com/';
 
 
-
-
-    getAllPosts() {
-      return  fetch(this.url)
-            .then(value => value.json())
-            .then(allposts => {
-                return allposts.slice(0, 10);
-            });
+    getAll(who) {
+        return fetch(`${this.url}${who}`).then(value => value.json()).then(value => {
+            return value.slice(0, 10);
+        });
     }
 
-    getPostbyID (id) {
-        return  fetch(`${this.url}${id}`)
-            .then(value => value.json())
-            .then(value => value);
+    getbyID(who, id) {
+        return fetch(`${this.url}${who}/${id}`).then(value => value.json()).then(value => value);
     }
-    deletePost (posts, id) {
-        let dell = (posts.find(value => value.id === id)).id;
-        let res = posts.filter(post => post.id !== dell);
+
+    deleteID(arr, id) {
+        let dell = (arr.find(value => value.id === id)).id;
+        let res = arr.filter(post => post.id !== dell);
         return res;
-
     }
 }
 
