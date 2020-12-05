@@ -1,22 +1,20 @@
 import React, {Component} from 'react';
 import Coment from "../coment/Coment";
 import './AllComents.css'
+import {PostService} from "../../services/PostService";
 
 class AllComents extends Component {
+
+    postService = new PostService();
 
     state = {allpost: [], chosepost: null};
 
     chosepost = (id) => {
-        let {allpost} = this.state;
-        let chose = allpost.find(value => value.id === id);
-        console.log(chose.id);
-        this.setState({chosepost: chose})
+        this.postService.getPostbyID(id).then(value => this.setState({chosepost: value}))
     };
+
     deletepost = (id) => {
-        let {allpost} = this.state;
-        let dell = (allpost.find(value => value.id === id)).id;
-        let result = allpost.filter(post => post.id !== dell);
-        this.setState({allpost: result });
+        this.setState({allpost: this.postService.deletePost(this.state.allpost, id)});
     };
 
     render() {
@@ -29,19 +27,14 @@ class AllComents extends Component {
                                                 deletepost={this.deletepost}/>)
                 }
                 {
-                    chosepost && <h2><Coment post={chosepost}/></h2>
+                    chosepost && <Coment post={chosepost} flag={true}/>
                 }
             </div>
         );
     }
 
     componentDidMount() {
-        fetch('https://jsonplaceholder.typicode.com/posts')
-            .then(value => value.json())
-            .then(allposts => {
-                let allpost = allposts.slice(0, 10);
-                this.setState({allpost});
-            });
+        this.postService.getAllPosts().then(value => this.setState({allpost: value}))
     }
 
 
